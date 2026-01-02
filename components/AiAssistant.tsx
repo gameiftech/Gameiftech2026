@@ -24,7 +24,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
     { 
       id: '0', 
       role: 'model', 
-      text: 'Olá! Sou a Aura, IA da GameIFTech. 🤖 Vamos direto ao ponto: como posso te chamar?' 
+      text: 'Oie! Sou a Carol, da GameIFTech. 👋 Vamos agilizar: como posso te chamar?' 
     }
   ]);
   
@@ -63,7 +63,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
           setMessages(prev => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'model',
-            text: `Prazer, ${userText}. Para contato rápido via WhatsApp, qual seu número com DDD?`
+            text: `Prazer! E qual seu WhatsApp (com DDD) pra gente se falar melhor?`
           }]);
           setChatState('ASK_PHONE');
           setIsLoading(false);
@@ -81,7 +81,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
           setMessages(prev => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'model',
-            text: `Anotado. E qual seu e-mail para enviarmos a proposta?`
+            text: `Show. Me passa seu e-mail rapidinho?`
           }]);
           setChatState('ASK_EMAIL');
           setIsLoading(false);
@@ -99,7 +99,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
             setMessages(prev => [...prev, {
               id: (Date.now() + 1).toString(),
               role: 'model',
-              text: "Esse e-mail parece inválido. Pode verificar?"
+              text: "Vixi, esse e-mail parece errado. Confere pra mim?"
             }]);
             setIsLoading(false);
           }, 600);
@@ -111,14 +111,14 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
           name: leadName,
           phone: leadPhone,
           email: userText,
-          message: 'Usuário completou o cadastro inicial no chat da IA (Aura).'
+          message: 'Usuário completou o cadastro inicial no chat da IA (Carol).'
         });
 
         setTimeout(() => {
           setMessages(prev => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'model',
-            text: "Dados recebidos! Agora me conte: qual é o seu projeto ou ideia?"
+            text: "Tudo anotado! Agora me conta, qual é a ideia do seu projeto?"
           }]);
           setChatState('READY');
           setIsLoading(false);
@@ -130,8 +130,8 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
       // STEP 4: NORMAL GEMINI CHAT
       // ----------------------------------------------------
       if (chatState === 'READY') {
-        // Give Gemini context of who it's talking to
-        const prompt = `[Lead: ${leadName}, Phone: ${leadPhone}] ${userText}`;
+        // Context injection, but System Prompt handles the tone
+        const prompt = `[Cliente: ${leadName}, Tel: ${leadPhone}] ${userText}`;
         const responseText = await sendMessageToGemini(prompt);
         
         const aiMessage: ChatMessage = {
@@ -149,7 +149,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
        setMessages(prev => [...prev, {
          id: Date.now().toString(),
          role: 'model',
-         text: "Tive um erro rápido. Pode repetir?",
+         text: "Deu um erro aqui rapidinho. Pode repetir?",
          isError: true
        }]);
        setIsLoading(false);
@@ -165,7 +165,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
     if (chatState === 'ASK_NAME') return "Seu nome...";
     if (chatState === 'ASK_PHONE') return "WhatsApp com DDD...";
     if (chatState === 'ASK_EMAIL') return "Seu e-mail...";
-    return "Descreva seu projeto...";
+    return "Fale sobre seu projeto...";
   };
 
   return (
@@ -189,8 +189,8 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
                 <Sparkles size={18} className="text-white" />
             </div>
             <div>
-              <h3 className="font-bold text-white">Aura - GameIFTech</h3>
-              <p className="text-xs text-brand-neonBlue">Online • Inteligência Artificial</p>
+              <h3 className="font-bold text-white">Carol - GameIFTech</h3>
+              <p className="text-xs text-brand-neonBlue">Online • Assistente Virtual</p>
             </div>
           </div>
 
