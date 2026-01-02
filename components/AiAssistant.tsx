@@ -24,7 +24,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
     { 
       id: '0', 
       role: 'model', 
-      text: 'Olá! Sou a Nova, a inteligência artificial da GameIFTech. 🤖✨ Estou pronta para impulsionar seu projeto. Para iniciarmos um atendimento exclusivo, como posso te chamar?' 
+      text: 'Olá! Sou a Aura, IA da GameIFTech. 🤖 Vamos direto ao ponto: como posso te chamar?' 
     }
   ]);
   
@@ -63,11 +63,11 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
           setMessages(prev => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'model',
-            text: `É um prazer te conhecer, ${userText}! 🚀 Para agilizarmos sua consultoria e mantermos contato via WhatsApp, poderia me informar seu número com DDD?`
+            text: `Prazer, ${userText}. Para contato rápido via WhatsApp, qual seu número com DDD?`
           }]);
           setChatState('ASK_PHONE');
           setIsLoading(false);
-        }, 800);
+        }, 600);
         return;
       }
 
@@ -81,11 +81,11 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
           setMessages(prev => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'model',
-            text: `Excelente! E para formalizarmos propostas e detalhes técnicos, qual é o seu melhor e-mail corporativo ou pessoal? 📧`
+            text: `Anotado. E qual seu e-mail para enviarmos a proposta?`
           }]);
           setChatState('ASK_EMAIL');
           setIsLoading(false);
-        }, 800);
+        }, 600);
         return;
       }
 
@@ -99,7 +99,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
             setMessages(prev => [...prev, {
               id: (Date.now() + 1).toString(),
               role: 'model',
-              text: "Hmm, o formato do e-mail parece incorreto. Poderia verificar e digitar novamente, por favor?"
+              text: "Esse e-mail parece inválido. Pode verificar?"
             }]);
             setIsLoading(false);
           }, 600);
@@ -111,18 +111,18 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
           name: leadName,
           phone: leadPhone,
           email: userText,
-          message: 'Usuário completou o cadastro inicial no chat da IA (Nova).'
+          message: 'Usuário completou o cadastro inicial no chat da IA (Aura).'
         });
 
         setTimeout(() => {
           setMessages(prev => [...prev, {
             id: (Date.now() + 1).toString(),
             role: 'model',
-            text: "Tudo pronto! Seus dados estão seguros comigo. 🔒 Agora, conte-me: que desafio tecnológico ou projeto incrível você quer tirar do papel hoje?"
+            text: "Dados recebidos! Agora me conte: qual é o seu projeto ou ideia?"
           }]);
           setChatState('READY');
           setIsLoading(false);
-        }, 1000);
+        }, 800);
         return;
       }
 
@@ -149,7 +149,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
        setMessages(prev => [...prev, {
          id: Date.now().toString(),
          role: 'model',
-         text: "Desculpe, tive um breve lapso nos meus circuitos. Pode repetir, por favor?",
+         text: "Tive um erro rápido. Pode repetir?",
          isError: true
        }]);
        setIsLoading(false);
@@ -162,10 +162,10 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
 
   // Determine placeholder text based on state
   const getPlaceholder = () => {
-    if (chatState === 'ASK_NAME') return "Digite seu nome...";
-    if (chatState === 'ASK_PHONE') return "(11) 99999-9999";
-    if (chatState === 'ASK_EMAIL') return "Digite seu e-mail...";
-    return "Descreva seu projeto ou dúvida...";
+    if (chatState === 'ASK_NAME') return "Seu nome...";
+    if (chatState === 'ASK_PHONE') return "WhatsApp com DDD...";
+    if (chatState === 'ASK_EMAIL') return "Seu e-mail...";
+    return "Descreva seu projeto...";
   };
 
   return (
@@ -189,7 +189,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
                 <Sparkles size={18} className="text-white" />
             </div>
             <div>
-              <h3 className="font-bold text-white">Nova - GameIFTech</h3>
+              <h3 className="font-bold text-white">Aura - GameIFTech</h3>
               <p className="text-xs text-brand-neonBlue">Online • Inteligência Artificial</p>
             </div>
           </div>
@@ -202,7 +202,7 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-2xl text-sm ${
+                  className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${
                     msg.role === 'user'
                       ? 'bg-brand-neonBlue text-white rounded-br-none'
                       : 'bg-white/10 text-gray-200 rounded-bl-none'
@@ -215,9 +215,9 @@ export const AiAssistant: React.FC<AiAssistantProps> = ({ isOpen, onToggle }) =>
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white/5 p-3 rounded-2xl rounded-bl-none flex gap-1 items-center">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200" />
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" />
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce delay-100" />
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce delay-200" />
                 </div>
               </div>
             )}

@@ -23,7 +23,7 @@ export const submitToGoogleForm = async (data: LeadData): Promise<boolean> => {
   formBody.append(GOOGLE_FORM_ENTRIES.EMAIL, data.email);
   formBody.append(GOOGLE_FORM_ENTRIES.PHONE, data.phone);
   formBody.append(GOOGLE_FORM_ENTRIES.INTEREST, data.interest || 'Contato via Assistente Virtual');
-  formBody.append(GOOGLE_FORM_ENTRIES.MESSAGE, data.message || 'Usuário iniciou conversa com a Nova (IA).');
+  formBody.append(GOOGLE_FORM_ENTRIES.MESSAGE, data.message || 'Usuário iniciou conversa com a Aura (IA).');
 
   try {
     await fetch(GOOGLE_FORM_ACTION_URL, {
